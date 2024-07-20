@@ -6,7 +6,9 @@ import javafx.stage.Stage;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 class Room {
     private int roomNumber;
@@ -200,9 +202,9 @@ public class HotelReservationSystem extends Application {
     }
 
     private void seedRooms() {
-        rooms.add(new Room(101, "Single", 100));
-        rooms.add(new Room(102, "Double", 150));
-        rooms.add(new Room(103, "Suite", 300));
+        rooms.add(new Room(40, "Single", 100));
+        rooms.add(new Room(20, "Double", 150));
+        rooms.add(new Room(15, "Suite", 300));
     }
 
     private VBox createSearchTabContent() {
@@ -288,12 +290,10 @@ public class HotelReservationSystem extends Application {
             Payment payment = new Payment(reservation, amount);
             payments.add(payment);
 
-            showAlert(Alert.AlertType.INFORMATION, "Reservation successful.");
+            showAlert(Alert.AlertType.INFORMATION, "Reservation successful. Reservation ID: " + reservation.getReservationId());
         });
 
-        vbox.getChildren().addAll(nameLabel, nameField, emailLabel, emailField,
-                roomNumberLabel, roomNumberField, startDateLabel, startDateField,
-                endDateLabel, endDateField, amountLabel, amountField, reserveButton);
+        vbox.getChildren().addAll(nameLabel, nameField, emailLabel, emailField, roomNumberLabel, roomNumberField, startDateLabel, startDateField, endDateLabel, endDateField, amountLabel, amountField, reserveButton);
         return vbox;
     }
 
@@ -310,13 +310,12 @@ public class HotelReservationSystem extends Application {
 
         viewButton.setOnAction(event -> {
             int reservationId = Integer.parseInt(reservationIdField.getText());
-            for (Reservation reservation : reservations) {
-                if (reservation.getReservationId() == reservationId) {
-                    resultArea.setText(reservation.toString());
-                    return;
-                }
+            Reservation reservation = findReservationById(reservationId);
+            if (reservation == null) {
+                resultArea.setText("Reservation not found.");
+            } else {
+                resultArea.setText(reservation.toString());
             }
-            resultArea.setText("Reservation not found.");
         });
 
         vbox.getChildren().addAll(reservationIdLabel, reservationIdField, viewButton, resultArea);
@@ -327,6 +326,15 @@ public class HotelReservationSystem extends Application {
         for (Room room : rooms) {
             if (room.getRoomNumber() == roomNumber) {
                 return room;
+            }
+        }
+        return null;
+    }
+
+    private Reservation findReservationById(int reservationId) {
+        for (Reservation reservation : reservations) {
+            if (reservation.getReservationId() == reservationId) {
+                return reservation;
             }
         }
         return null;
