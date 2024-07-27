@@ -1,4 +1,6 @@
-Welcome to Omid's Programming Playground! This repository showcases a variety of projects I've worked on, reflecting my journey as a developer. Below, you'll find a brief overview of each project:
+Welcome to Omid's Programming Playground! 
+
+This repository showcases a variety of projects I've worked on, reflecting my journey as a developer. Below, you'll find a brief overview of each project:
 
 Projects
 Hotel Reservation System
