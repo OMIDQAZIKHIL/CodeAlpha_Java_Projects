@@ -2,7 +2,7 @@ Welcome to Omid's Programming Playground!
 
 This repository showcases a variety of projects I've worked on, reflecting my journey as a developer. Below, you'll find a brief overview of each project:
 
-Projects
+* Projects
 1. Hotel Reservation System
 
 Description: A Java-based application to manage hotel bookings.
