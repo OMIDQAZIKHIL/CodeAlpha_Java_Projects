@@ -20,4 +20,3 @@ Technologies: Java, SQL.
 Description: A platform to simulate stock trading.
 Features: Buy/sell stocks, portfolio management, market analysis.
 Technologies: Java, REST APIs.
-

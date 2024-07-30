@@ -45,12 +45,8 @@ class Room {
 
     @Override
     public String toString() {
-        return "Room{" +
-                "roomNumber=" + roomNumber +
-                ", category='" + category + '\'' +
-                ", price=" + price +
-                ", isAvailable=" + isAvailable +
-                '}';
+        return String.format("Room Number: %d%nCategory: %s%nPrice: $%.2f%nAvailable: %s%n",
+                roomNumber, category, price, isAvailable ? "Yes" : "No");
     }
 }
 
@@ -92,13 +88,9 @@ class Reservation {
 
     @Override
     public String toString() {
-        return "Reservation{" +
-                "reservationId=" + reservationId +
-                ", user=" + user +
-                ", room=" + room +
-                ", startDate=" + startDate +
-                ", endDate=" + endDate +
-                '}';
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        return String.format("Reservation ID: %d%nUser: %s%nRoom: %s%nStart Date: %s%nEnd Date: %s%n",
+                reservationId, user, room, sdf.format(startDate), sdf.format(endDate));
     }
 }
 
@@ -121,10 +113,7 @@ class User {
 
     @Override
     public String toString() {
-        return "User{" +
-                "name='" + name + '\'' +
-                ", email='" + email + '\'' +
-                '}';
+        return String.format("Name: %s%nEmail: %s", name, email);
     }
 }
 
@@ -160,12 +149,9 @@ class Payment {
 
     @Override
     public String toString() {
-        return "Payment{" +
-                "paymentId=" + paymentId +
-                ", reservation=" + reservation +
-                ", amount=" + amount +
-                ", paymentDate=" + paymentDate +
-                '}';
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        return String.format("Payment ID: %d%nReservation: %s%nAmount: $%.2f%nPayment Date: %s%n",
+                paymentId, reservation, amount, sdf.format(paymentDate));
     }
 }
 
@@ -290,10 +276,12 @@ public class HotelReservationSystem extends Application {
             Payment payment = new Payment(reservation, amount);
             payments.add(payment);
 
-            showAlert(Alert.AlertType.INFORMATION, "Reservation successful. Reservation ID: " + reservation.getReservationId());
+            showAlert(Alert.AlertType.INFORMATION,
+                    "Reservation successful. Reservation ID: " + reservation.getReservationId());
         });
 
-        vbox.getChildren().addAll(nameLabel, nameField, emailLabel, emailField, roomNumberLabel, roomNumberField, startDateLabel, startDateField, endDateLabel, endDateField, amountLabel, amountField, reserveButton);
+        vbox.getChildren().addAll(nameLabel, nameField, emailLabel, emailField, roomNumberLabel, roomNumberField,
+                startDateLabel, startDateField, endDateLabel, endDateField, amountLabel, amountField, reserveButton);
         return vbox;
     }
 
